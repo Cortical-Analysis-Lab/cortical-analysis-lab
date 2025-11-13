@@ -25,7 +25,6 @@
       font-family: "Inter", sans-serif;
     }
 
-    /* ---------- NAVBAR ---------- */
     nav {
       position: fixed;
       top: 0;
@@ -44,7 +43,6 @@
       color: var(--red);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
       text-decoration: none;
     }
 
@@ -65,7 +63,6 @@
 
     nav ul li a:hover { color: var(--red); }
 
-    /* ---------- HEADER ---------- */
     header {
       padding: 8rem 2rem 3rem;
       text-align: center;
@@ -81,7 +78,6 @@
 
     header p { color: #ccc; font-size: 1.1rem; }
 
-    /* ---------- PUBLICATION LIST ---------- */
     #pub-list {
       max-width: 900px;
       margin: 3rem auto;
@@ -94,10 +90,7 @@
       padding: 1.5rem;
       margin-bottom: 1.8rem;
       border-radius: 6px;
-      transition: transform 0.3s ease;
     }
-
-    .pub:hover { transform: translateX(6px); }
 
     .pub-title {
       color: var(--white);
@@ -116,20 +109,30 @@
 
     .pub a:hover { text-decoration: underline; }
 
-    .significance {
-      background: #0b0b0b;
-      border-left: 3px solid #333;
-      padding: 0.8rem 1rem;
+    textarea {
+      width: 100%;
+      background: #222;
+      border: none;
+      border-radius: 6px;
+      color: var(--white);
+      padding: 0.8rem;
       margin-top: 0.8rem;
-      border-radius: 4px;
-      color: #aaa;
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
     }
 
-    .significance strong { color: var(--red); }
+    .significance {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      background: #0b0b0b;
+      padding: 0.6rem 0.8rem;
+      border-left: 3px solid #333;
+      border-radius: 4px;
+      display: none;
+    }
 
-    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
       padding: 2rem;
@@ -149,8 +152,6 @@
 </head>
 
 <body>
-
-  <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <ul>
@@ -162,18 +163,15 @@
     </ul>
   </nav>
 
-  <!-- HEADER -->
   <header>
     <h1>Publications</h1>
     <p>Automatically updated from <a href="https://orcid.org/0000-0001-9059-8250" target="_blank" style="color:#B30838;text-decoration:none;">ORCID</a></p>
   </header>
 
-  <!-- PUBLICATIONS CONTAINER -->
   <section id="pub-list">
-    <p style="color:#888;text-align:center;">Loading publications from ORCID...</p>
+    <p style="color:#888;text-align:center;">Loading publications...</p>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University<br>
     <a href="mailto:shaun.james@sacredheart.edu">shaun.james@sacredheart.edu</a>
@@ -200,35 +198,43 @@
           const year = pub.year || "";
           const doi = pub.doi ? `<a href="https://doi.org/${pub.doi}" target="_blank">DOI: ${pub.doi}</a>` : "";
 
-          // Default significance (can later be added per entry)
-          const significance = `
-            <div class="significance">
-              <strong>Significance:</strong> 
-              This study contributes to the lab’s ongoing efforts to understand cortical activity, neurovascular coupling, and brain–behavior relationships using multimodal approaches.
-            </div>`;
-
+          // Main publication block
           el.innerHTML = `
             <div class="pub-title">${title}</div>
             <div class="pub-journal"><em>${journal}</em> ${year ? ", " + year : ""}</div>
             ${doi}
-            ${significance}
+            <textarea placeholder="Add significance statement here..."></textarea>
+            <div class="significance"><strong>Significance:</strong> <span></span></div>
           `;
+
+          // Make textarea update the visible statement
+          const textarea = el.querySelector("textarea");
+          const sigDiv = el.querySelector(".significance");
+          const sigText = sigDiv.querySelector("span");
+
+          textarea.addEventListener("input", () => {
+            const value = textarea.value.trim();
+            if (value) {
+              sigDiv.style.display = "block";
+              sigText.textContent = value;
+            } else {
+              sigDiv.style.display = "none";
+            }
+          });
+
           container.appendChild(el);
         });
 
         if (pubs.length === 0) {
           container.innerHTML = "<p style='color:#777;text-align:center;'>No publications found in ORCID yet.</p>";
         }
-
       } catch (err) {
         document.getElementById("pub-list").innerHTML =
           `<p style='color:#f55;text-align:center;'>⚠️ Error loading publications: ${err.message}</p>`;
-        console.error(err);
       }
     }
 
     loadPublications();
   </script>
-
 </body>
 </html>
