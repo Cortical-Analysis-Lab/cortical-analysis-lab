@@ -10,6 +10,7 @@
       --red: #B30838;
       --offwhite: #faf7f5;
       --text: #222;
+      --shadow: rgba(0,0,0,0.05);
     }
 
     body {
@@ -20,12 +21,13 @@
       line-height: 1.6;
     }
 
+    /* ---------- NAVIGATION ---------- */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      background: var(--offwhite);
+      box-shadow: 0 2px 6px var(--shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -71,10 +73,11 @@
       width: 100%;
     }
 
+    /* ---------- HEADER ---------- */
     header {
       text-align: center;
       padding: 10rem 2rem 6rem;
-      background: #fff;
+      background: var(--offwhite);
     }
 
     header h1 {
@@ -87,9 +90,10 @@
       max-width: 700px;
       margin: auto;
       font-size: 1.1rem;
-      color: #555;
+      color: #444;
     }
 
+    /* ---------- SECTIONS ---------- */
     section {
       max-width: 900px;
       margin: 4rem auto;
@@ -105,30 +109,34 @@
     }
 
     .card {
-      background: #fff;
+      background: var(--offwhite);
       border-radius: 10px;
       padding: 1.5rem 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px var(--shadow);
       margin-bottom: 2rem;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
       transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
 
+    /* ---------- FOOTER ---------- */
     footer {
-      background: #fff;
+      background: var(--offwhite);
       padding: 2rem;
       text-align: center;
-      color: #777;
+      color: #666;
       font-size: 0.9rem;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #ddd;
+      box-shadow: 0 -2px 6px var(--shadow);
     }
 
     footer a {
       color: var(--red);
       text-decoration: none;
+      font-weight: 500;
     }
 
     footer a:hover {
