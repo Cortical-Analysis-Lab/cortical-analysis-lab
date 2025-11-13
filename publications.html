@@ -21,63 +21,111 @@
       line-height: 1.6;
     }
 
-    header {
-      background: var(--red);
-      color: var(--offwhite);
+    /* ---------- NAVIGATION ---------- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--offwhite);
+      box-shadow: 0 2px 6px var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 1rem 2rem;
-      text-align: center;
-      font-size: 1.8rem;
+      z-index: 100;
+    }
+
+    nav .logo {
       font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--red);
+      text-decoration: none;
       letter-spacing: 1px;
     }
 
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem 3rem;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
 
-    h1, h2 {
+    nav ul li a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      text-align: center;
+      padding: 9rem 2rem 4rem;
+      background: var(--offwhite);
+    }
+
+    header h1 {
       color: var(--red);
-      margin-top: 2rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    h2 {
+      color: var(--red);
       margin-bottom: 0.5rem;
       border-bottom: 2px solid var(--red);
       display: inline-block;
       padding-bottom: 4px;
     }
 
-    p.subtext {
-      color: #555;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-
     .publication {
       background: var(--offwhite);
       border-radius: 10px;
       padding: 1.5rem 2rem;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid var(--red);
       box-shadow: 0 4px 10px var(--shadow);
-      transition: transform 0.2s ease;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--red);
+      transition: all 0.2s ease;
     }
 
     .publication:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    }
-
-    h3 {
-      color: var(--red);
-      margin-bottom: 0.6rem;
-      font-size: 1.05rem;
-      font-weight: 700;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
     }
 
     .journal {
       font-weight: 500;
       color: #555;
-      font-size: 0.95rem;
     }
 
     .doi {
@@ -87,22 +135,11 @@
     }
 
     .significance {
-      margin-top: 0.8rem;
+      margin-top: 0.7rem;
       font-size: 0.95rem;
       color: #333;
-      background: #f1ebe8;
-      border-left: 3px solid var(--red);
-      padding: 0.8rem 1rem;
-      border-radius: 6px;
-    }
-
-    footer {
-      text-align: center;
-      color: #666;
-      padding: 1.5rem 0;
-      font-size: 0.9rem;
-      border-top: 1px solid #ddd;
-      background: var(--offwhite);
+      border-left: 2px solid var(--red);
+      padding-left: 10px;
     }
 
     .error {
@@ -110,37 +147,60 @@
       text-align: center;
       margin-top: 2rem;
     }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: var(--offwhite);
+      padding: 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+      box-shadow: 0 -2px 6px var(--shadow);
+    }
+
+    footer a {
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
-  <header>🧠 Cortical Analysis Lab — Publications</header>
+  <nav>
+    <a href="./" class="logo">Cortical Analysis Lab</a>
+    <ul>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="people.html">People</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="collaborate.html">Collaborate</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <!-- LAB PUBLICATIONS -->
-    <h1>Lab Publications</h1>
-    <p class="subtext">In progress — manuscripts and preprints under development.</p>
+  <header>
+    <h1>Publications</h1>
+    <p>Browse the published research from the Cortical Analysis Lab and related projects led by Dr. Shaun James.</p>
+  </header>
 
-    <div class="publication">
-      <h3>Upcoming Manuscripts (In Preparation)</h3>
-      <p class="journal">Details coming soon — new optical imaging and EEG datasets are currently being analyzed and prepared for submission.</p>
-    </div>
-
-    <!-- DR. JAMES PUBLICATIONS -->
-    <h1>Dr. James’ Publications</h1>
-    <div id="pub-container">
-      <p>Loading publications from ORCID...</p>
-    </div>
+  <main id="pub-container">
+    <p>Loading publications from ORCID...</p>
   </main>
 
   <footer>
-    <span id="last-updated">Loading last update...</span>
+    © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
 
   <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     async function loadPublications() {
       const container = document.getElementById("pub-container");
-      const footer = document.getElementById("last-updated");
 
       try {
         const response = await fetch("data/publications.json");
@@ -148,6 +208,31 @@
 
         const publications = await response.json();
         container.innerHTML = "";
+
+        if (publications.length === 0) {
+          container.innerHTML = "<p>No publications found.</p>";
+          return;
+        }
+
+        // Add section headers
+        container.insertAdjacentHTML("beforeend", `
+          <h2>Lab Publications</h2>
+          <p>Selected research works produced collaboratively within the Cortical Analysis Lab.</p>
+        `);
+
+        // Optional: Add placeholder for in-progress work
+        container.insertAdjacentHTML("beforeend", `
+          <div class="publication">
+            <h3>Ongoing Projects & Preprints</h3>
+            <p>Several manuscripts are currently under preparation exploring multimodal EEG-optical integration, 
+            cortical state mapping, and cross-behavioral signal dynamics.</p>
+          </div>
+        `);
+
+        // Add Dr. James' Publications
+        container.insertAdjacentHTML("beforeend", `
+          <h2>Dr. James’ Publications</h2>
+        `);
 
         publications.forEach(pub => {
           const doiLink = pub.doi
@@ -168,20 +253,11 @@
           `;
           container.insertAdjacentHTML("beforeend", html);
         });
-
-        if (publications.length === 0) {
-          container.innerHTML = "<p>No publications found.</p>";
-        }
-
-        const updatedDate = new Date().toLocaleString("en-US", {
-          year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
-        });
-        footer.textContent = `Last updated from ORCID: ${updatedDate}`;
-
       } catch (error) {
         console.error("Error loading publications:", error);
-        container.innerHTML = `<p class="error">⚠️ Error loading publications: Unable to load <code>data/publications.json</code></p>`;
-        footer.textContent = "⚠️ Unable to fetch last update time.";
+        container.innerHTML = `
+          <p class="error">⚠️ Error loading publications: Unable to load <code>data/publications.json</code></p>
+        `;
       }
     }
 
