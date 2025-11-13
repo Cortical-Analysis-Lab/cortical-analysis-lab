@@ -1,48 +1,57 @@
-# ===============================================================
-# Cortical Analysis Lab | ORCID Auto-Updater
-# ===============================================================
-# Fetches publication data from ORCID and updates publications.json
-# to be used by your publications.html page.
-# ===============================================================
+import requests
+import json
+import os
+from datetime import datetime
 
-import requests, json, os
+# ============================================================
+# 🧠 Cortical Analysis Lab — ORCID → publications.json updater
+# ============================================================
 
-ORCID = "0000-0001-9059-8250"
-API_URL = f"https://pub.orcid.org/v3.0/{ORCID}/works"
+ORCID_ID = "0000-0001-9059-8250"
+ORCID_API_URL = f"https://pub.orcid.org/v3.0/{ORCID_ID}/works"
 HEADERS = {"Accept": "application/json"}
 
-print("Fetching ORCID data...")
-r = requests.get(API_URL, headers=HEADERS)
-r.raise_for_status()
-data = r.json()
+print("🔍 Fetching publication data from ORCID...")
 
+# --- Fetch data from ORCID ---
+response = requests.get(ORCID_API_URL, headers=HEADERS)
+if response.status_code != 200:
+    raise Exception(f"Failed to fetch ORCID data (status {response.status_code})")
+
+data = response.json()
 works = data.get("group", [])
-pubs = []
+publications = []
 
-for w in works:
-    summary = w.get("work-summary", [])[0]
-    title = summary.get("title", {}).get("title", {}).get("value", "")
-    journal = summary.get("journal-title", {}).get("value", "")
-    year = summary.get("publication-date", {}).get("year", {}).get("value", "")
+# --- Extract publication info ---
+for item in works:
+    work_summary = item.get("work-summary", [{}])[0]
+    title = work_summary.get("title", {}).get("title", {}).get("value", "Untitled")
+    journal = work_summary.get("journal-title", {}).get("value", "")
+    year = work_summary.get("publication-date", {}).get("year", {}).get("value", "")
     doi = None
-    external_ids = summary.get("external-ids", {}).get("external-id", [])
-    for eid in external_ids:
-        if eid.get("external-id-type") == "doi":
-            doi = eid.get("external-id-value")
+
+    # Try to extract DOI from external identifiers
+    for ext_id in work_summary.get("external-ids", {}).get("external-id", []):
+        if ext_id.get("external-id-type", "").lower() == "doi":
+            doi = ext_id.get("external-id-value")
             break
 
-    pubs.append({
+    publications.append({
         "title": title,
-        "authors": "",  # ORCID doesn't provide all author names
         "journal": journal,
         "year": year,
         "doi": doi
     })
 
-pubs_sorted = sorted(pubs, key=lambda x: x["year"] or "0", reverse=True)
-os.makedirs("_data", exist_ok=True)
+# --- Sort publications (newest first) ---
+publications_sorted = sorted(publications, key=lambda x: x["year"] or "", reverse=True)
 
-with open("_data/publications.json", "w") as f:
-    json.dump(pubs_sorted, f, indent=2)
+# --- Save to /data/publications.json ---
+os.makedirs("data", exist_ok=True)
+output_path = "data/publications.json"
 
-print(f"✅ Updated {len(pubs_sorted)} publications.")
+with open(output_path, "w", encoding="utf-8") as f:
+    json.dump(publications_sorted, f, indent=2, ensure_ascii=False)
+
+print(f"✅ {len(publications_sorted)} publications saved to {output_path}")
+print(f"🕒 Last updated: {datetime.now().isoformat(timespec='seconds')}")
