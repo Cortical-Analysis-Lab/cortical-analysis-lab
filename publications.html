@@ -14,6 +14,7 @@
       color: #fff;
       line-height: 1.6;
     }
+
     header {
       background: #800000;
       padding: 1rem 2rem;
@@ -22,15 +23,18 @@
       font-weight: 700;
       letter-spacing: 1px;
     }
+
     main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     h2 {
       color: #ff5555;
       margin-bottom: 0.5rem;
     }
+
     .publication {
       background: rgba(255, 255, 255, 0.05);
       padding: 1rem 1.5rem;
@@ -39,18 +43,22 @@
       border-left: 3px solid #b22222;
       transition: all 0.2s ease;
     }
+
     .publication:hover {
       background: rgba(255, 255, 255, 0.1);
       transform: translateX(5px);
     }
+
     .journal {
       font-weight: 500;
       color: #ccc;
     }
+
     .doi {
       color: #ffaaaa;
       font-size: 0.9rem;
     }
+
     .significance {
       margin-top: 0.7rem;
       font-size: 0.95rem;
@@ -58,6 +66,7 @@
       border-left: 2px solid #ff5555;
       padding-left: 10px;
     }
+
     .error {
       color: #ff8080;
       text-align: center;
@@ -65,8 +74,10 @@
     }
   </style>
 </head>
+
 <body>
   <header>🧠 Cortical Analysis Lab — Publications</header>
+
   <main id="pub-container">
     <p>Loading publications from ORCID...</p>
   </main>
@@ -74,9 +85,10 @@
   <script>
     async function loadPublications() {
       const container = document.getElementById("pub-container");
+
       try {
-        // ✅ Use full subpath for your current repo name
-        const response = await fetch("CorticalAnalysisLab/data/publications.json");
+        // ✅ Correct relative path for your project site
+        const response = await fetch("data/publications.json");
         if (!response.ok) throw new Error("Network response not OK");
 
         const publications = await response.json();
@@ -107,7 +119,7 @@
         }
       } catch (error) {
         console.error("Error loading publications:", error);
-        container.innerHTML = `<p class="error">⚠️ Error loading publications: Unable to load <code>CorticalAnalysisLab/data/publications.json</code></p>`;
+        container.innerHTML = `<p class="error">⚠️ Error loading publications: Unable to load <code>data/publications.json</code></p>`;
       }
     }
 
