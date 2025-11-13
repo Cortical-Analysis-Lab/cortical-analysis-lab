@@ -10,7 +10,7 @@
       --red: #B30838;
       --offwhite: #faf7f5;
       --text: #222;
-      --lightbox: #ffffff;
+      --shadow: rgba(0,0,0,0.05);
     }
 
     body {
@@ -23,7 +23,7 @@
 
     header {
       background: var(--red);
-      color: var(--lightbox);
+      color: var(--offwhite);
       padding: 1rem 2rem;
       text-align: center;
       font-size: 1.8rem;
@@ -37,28 +37,32 @@
       padding: 0 1rem;
     }
 
-    h2 {
-      color: var(--red);
-      margin-bottom: 0.5rem;
-    }
-
     .publication {
-      background: var(--lightbox);
-      padding: 1.2rem 1.5rem;
+      background: var(--offwhite);
       border-radius: 10px;
+      padding: 1.5rem 2rem;
       margin-bottom: 1.5rem;
       border-left: 4px solid var(--red);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px var(--shadow);
       transition: transform 0.2s ease;
     }
 
     .publication:hover {
       transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: var(--red);
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+      font-weight: 700;
     }
 
     .journal {
       font-weight: 500;
       color: #555;
+      font-size: 0.95rem;
     }
 
     .doi {
@@ -68,11 +72,13 @@
     }
 
     .significance {
-      margin-top: 0.7rem;
+      margin-top: 0.8rem;
       font-size: 0.95rem;
-      color: #444;
-      border-left: 2px solid var(--red);
-      padding-left: 10px;
+      color: #333;
+      background: #f1ebe8;
+      border-left: 3px solid var(--red);
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
     }
 
     footer {
@@ -81,7 +87,6 @@
       padding: 1.5rem 0;
       font-size: 0.9rem;
       border-top: 1px solid #ddd;
-      margin-top: 2rem;
       background: var(--offwhite);
     }
 
@@ -110,7 +115,6 @@
       const footer = document.getElementById("last-updated");
 
       try {
-        // ✅ Correct relative path
         const response = await fetch("data/publications.json");
         if (!response.ok) throw new Error("Network response not OK");
 
