@@ -184,7 +184,7 @@
 
     async function loadPublications() {
       try {
-        const response = await fetch("/_data/publications.json");
+        const response = await fetch("/data/publications.json");
         if (!response.ok) throw new Error("Unable to load publications.json");
         const pubs = await response.json();
 
@@ -199,7 +199,13 @@
           const journal = pub.journal || "";
           const year = pub.year || "";
           const doi = pub.doi ? `<a href="https://doi.org/${pub.doi}" target="_blank">DOI: ${pub.doi}</a>` : "";
-          const significance = `<div class="significance"><strong>Significance:</strong> This work contributes to the lab’s ongoing efforts to understand neurovascular and neurometabolic coupling using multimodal imaging and electrophysiological approaches.</div>`;
+
+          // Default significance (can later be added per entry)
+          const significance = `
+            <div class="significance">
+              <strong>Significance:</strong> 
+              This study contributes to the lab’s ongoing efforts to understand cortical activity, neurovascular coupling, and brain–behavior relationships using multimodal approaches.
+            </div>`;
 
           el.innerHTML = `
             <div class="pub-title">${title}</div>
