@@ -67,6 +67,15 @@
       padding-left: 10px;
     }
 
+    footer {
+      text-align: center;
+      color: #aaa;
+      padding: 1.5rem 0;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 2rem;
+    }
+
     .error {
       color: #ff8080;
       text-align: center;
@@ -82,9 +91,14 @@
     <p>Loading publications from ORCID...</p>
   </main>
 
+  <footer>
+    <span id="last-updated">Loading last update...</span>
+  </footer>
+
   <script>
     async function loadPublications() {
       const container = document.getElementById("pub-container");
+      const footer = document.getElementById("last-updated");
 
       try {
         // ✅ Correct relative path for your project site
@@ -94,6 +108,7 @@
         const publications = await response.json();
         container.innerHTML = "";
 
+        // --- Display each publication ---
         publications.forEach(pub => {
           const doiLink = pub.doi
             ? `<a class="doi" href="https://doi.org/${pub.doi}" target="_blank">DOI: ${pub.doi}</a>`
@@ -117,9 +132,21 @@
         if (publications.length === 0) {
           container.innerHTML = "<p>No publications found.</p>";
         }
+
+        // --- Display Last Updated timestamp ---
+        const updatedDate = new Date().toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+        footer.textContent = `Last updated from ORCID: ${updatedDate}`;
+
       } catch (error) {
         console.error("Error loading publications:", error);
         container.innerHTML = `<p class="error">⚠️ Error loading publications: Unable to load <code>data/publications.json</code></p>`;
+        footer.textContent = "⚠️ Unable to fetch last update time.";
       }
     }
 
