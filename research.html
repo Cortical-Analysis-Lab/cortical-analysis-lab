@@ -1,37 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research | Cortical Analysis Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --red: #B30838;
-      --black: #000;
-      --white: #fff;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+      --offwhite: #faf7f5;
+      --text: #222;
+      --shadow: rgba(0,0,0,0.05);
     }
 
     body {
       margin: 0;
-      background: var(--black);
-      color: var(--white);
+      background: var(--offwhite);
+      color: var(--text);
       font-family: "Inter", sans-serif;
+      line-height: 1.6;
     }
 
-    /* ---------- NAVBAR ---------- */
+    /* ---------- NAVIGATION ---------- */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
+      background: var(--offwhite);
+      box-shadow: 0 2px 6px var(--shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -40,12 +36,11 @@
     }
 
     nav .logo {
+      font-weight: 700;
       font-size: 1.2rem;
       color: var(--red);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
       text-decoration: none;
+      letter-spacing: 1px;
     }
 
     nav ul {
@@ -57,22 +52,32 @@
     }
 
     nav ul li a {
-      color: var(--white);
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      position: relative;
     }
 
-    nav ul li a:hover {
-      color: var(--red);
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
     }
 
     /* ---------- HEADER ---------- */
     header {
-      padding: 8rem 2rem 3rem;
       text-align: center;
-      max-width: 900px;
-      margin: auto;
+      padding: 9rem 2rem 5rem;
+      background: var(--offwhite);
     }
 
     header h1 {
@@ -82,55 +87,61 @@
     }
 
     header p {
-      color: #ccc;
+      max-width: 700px;
+      margin: auto;
       font-size: 1.1rem;
+      color: #444;
     }
 
-    /* ---------- SECTION ---------- */
+    /* ---------- SECTION LAYOUT ---------- */
     section {
-      max-width: 900px;
+      max-width: 950px;
       margin: 3rem auto;
       padding: 0 2rem;
-      line-height: 1.6;
     }
 
-    section h2 {
+    h2 {
       color: var(--red);
-      font-size: 1.8rem;
-      margin-top: 3rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--red);
+      display: inline-block;
+      padding-bottom: 4px;
     }
 
-    section p {
-      color: #ccc;
-      font-size: 1.05rem;
+    .card {
+      background: var(--offwhite);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 4px 10px var(--shadow);
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .highlight-box {
-      border-left: 3px solid var(--red);
-      background: #111;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 6px;
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
 
-    .highlight-box h3 {
+    .highlight {
       color: var(--red);
-      margin-top: 0;
+      font-weight: 600;
     }
 
     /* ---------- FOOTER ---------- */
     footer {
-      text-align: center;
+      background: var(--offwhite);
       padding: 2rem;
-      background: #111;
-      color: #888;
+      text-align: center;
+      color: #666;
       font-size: 0.9rem;
-      margin-top: 4rem;
+      border-top: 1px solid #ddd;
+      box-shadow: 0 -2px 6px var(--shadow);
     }
 
     footer a {
       color: var(--red);
       text-decoration: none;
+      font-weight: 500;
     }
 
     footer a:hover {
@@ -140,10 +151,8 @@
 </head>
 
 <body>
-
-  <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo">Cortical Analysis Lab</a>
+    <a href="./" class="logo">Cortical Analysis Lab</a>
     <ul>
       <li><a href="research.html">Research</a></li>
       <li><a href="people.html">People</a></li>
@@ -153,65 +162,55 @@
     </ul>
   </nav>
 
-  <!-- HEADER -->
   <header>
     <h1>Research</h1>
-    <p>Exploring how neural, vascular, and metabolic systems interact to support brain function and behavior.</p>
+    <p>Our lab investigates the dynamic relationships between neural activity, glial signaling, and vascular function — exploring how these interactions drive behavior and brain health.</p>
   </header>
 
-  <!-- MAIN CONTENT -->
   <section>
-    <h2>Neurovascular and Neurometabolic Coupling</h2>
-    <p>
-      The brain’s activity depends on tightly coordinated relationships between neurons,
-      glia, and blood vessels. Our lab studies how changes in blood flow and metabolism
-      reflect — or sometimes fail to reflect — the underlying neural signals. We use
-      optical imaging, EEG, and behavioral metrics to measure these relationships in vivo.
-    </p>
+    <h2>Research Areas</h2>
 
-    <div class="highlight-box">
-      <h3>Why This Matters</h3>
-      <p>
-        Disrupted neurovascular coupling is a hallmark of numerous disorders, including
-        stroke, FASD, and neurodegeneration. Understanding these interactions provides
-        insight into both normal and pathological brain function.
-      </p>
+    <div class="card">
+      <p><span class="highlight">Neurovascular Coupling:</span> Understanding how neuronal firing and hemodynamic responses interact under different behavioral and physiological states using optical imaging and EEG synchronization.</p>
     </div>
 
-    <h2>Multimodal Integration</h2>
-    <p>
-      Our experiments combine multiple data streams — widefield fluorescence, hemodynamic
-      reflectance, and electrophysiological recordings — to map how cortical states evolve
-      over time. These multimodal datasets allow us to connect large-scale network dynamics
-      with specific behavioral and physiological contexts.
-    </p>
+    <div class="card">
+      <p><span class="highlight">Cortical State Dynamics:</span> Quantifying large-scale oscillatory and metabolic changes that underlie transitions between alertness, rest, and anesthesia.</p>
+    </div>
 
-    <h2>Developmental and Translational Models</h2>
-    <p>
-      Using rodent models, we investigate how early-life environmental factors alter the
-      coordination of neural and vascular systems. Our long-term goal is to identify
-      biomarkers that bridge basic research and clinical application.
-    </p>
-
-    <div class="highlight-box">
-      <h3>Future Directions</h3>
-      <p>
-        The lab is actively developing new hardware and analysis pipelines to link
-        optical signals with EEG and behavioral data in real time — paving the way
-        for translational neurotechnology applications.
-      </p>
+    <div class="card">
+      <p><span class="highlight">Behavioral Correlates:</span> Relating multimodal brain signals to spatial exploration, decision-making, and anxiety-related behavior through advanced tracking paradigms such as the open field, zero maze, and object recognition tests.</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <section>
+    <h2>Methods & Technology</h2>
+
+    <div class="card">
+      <p>Our integrated pipeline combines <span class="highlight">widefield optical imaging, EEG acquisition, and behavioral video tracking</span> in synchronized, timestamp-aligned systems. 
+      All data are analyzed using in-house MATLAB and Python tools for motion correction, signal normalization, and multimodal correlation mapping.</p>
+    </div>
+
+    <div class="card">
+      <p>Recent technical developments include custom <span class="highlight">Nicla Vision–based imaging modules</span> for wireless acquisition, optimized <span class="highlight">LED excitation arrays</span>, and 
+      open-source <span class="highlight">EEG–behavior analysis toolkits</span> for signal classification and state segmentation.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Future Directions</h2>
+    <div class="card">
+      <p>Our upcoming work will extend multimodal measurements to awake, freely behaving animals to study neural–vascular integration during naturalistic tasks. 
+      These studies aim to establish predictive biomarkers of brain states relevant to <span class="highlight">neurodevelopmental and psychiatric disorders</span>.</p>
+    </div>
+  </section>
+
   <footer>
-    © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University<br>
-    <a href="mailto:shaun.james@sacredheart.edu">shaun.james@sacredheart.edu</a>
+    © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
