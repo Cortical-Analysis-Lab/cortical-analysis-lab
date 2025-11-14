@@ -7,16 +7,22 @@
   },
   "members": [
     {
-      "name": "Jane Doe",
+      "name": "Alex Rivera",
       "major": "Neuroscience",
-      "role": "Graduate Researcher",
+      "role": "Undergraduate Research Assistant",
       "academic_year": "2025–2026"
     },
     {
-      "name": "Alex Rivera",
+      "name": "Jane Doe",
       "major": "Psychology",
-      "role": "Undergraduate Research Assistant",
+      "role": "Graduate Researcher",
       "academic_year": "2024–2025"
+    },
+    {
+      "name": "John Smith",
+      "major": "Biology",
+      "role": "Undergraduate Research Assistant",
+      "academic_year": "2023–2024"
     }
   ]
 }
