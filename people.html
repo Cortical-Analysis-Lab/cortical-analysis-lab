@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>People | Cortical Analysis Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --red: #B30838;
       --offwhite: #faf7f5;
       --text: #222;
-      --shadow: rgba(0,0,0,0.05);
     }
 
     body {
@@ -21,13 +21,12 @@
       line-height: 1.6;
     }
 
-    /* ---------- NAVIGATION ---------- */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
       background: var(--offwhite);
-      box-shadow: 0 2px 6px var(--shadow);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -73,11 +72,11 @@
       width: 100%;
     }
 
-    /* ---------- HEADER ---------- */
     header {
+      padding: 8rem 2rem 3rem;
       text-align: center;
-      padding: 9rem 2rem 5rem;
-      background: var(--offwhite);
+      max-width: 900px;
+      margin: auto;
     }
 
     header h1 {
@@ -87,109 +86,141 @@
     }
 
     header p {
+      color: #555;
       max-width: 700px;
       margin: auto;
       font-size: 1.1rem;
-      color: #444;
     }
 
-    /* ---------- SECTION ---------- */
-    section {
-      max-width: 950px;
+    .separator {
+      border-top: 4px solid var(--red);
+      margin: 4rem auto;
+      max-width: 900px;
+    }
+
+    .pi-section {
+      max-width: 900px;
       margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    h2 {
-      color: var(--red);
-      margin-bottom: 1rem;
-      border-bottom: 2px solid var(--red);
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-
-    .card {
-      background: var(--offwhite);
+      padding: 2rem;
+      background: #fff;
       border-radius: 10px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 4px 10px var(--shadow);
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    }
-
-    .person {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
     }
 
-    .person img {
-      width: 130px;
-      height: 130px;
+    .pi-section img {
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
+      margin-bottom: 1rem;
       border: 3px solid var(--red);
     }
 
-    .person-info {
-      flex: 1;
-    }
-
-    .person-info h3 {
-      margin: 0;
+    .pi-section h2 {
       color: var(--red);
-      font-size: 1.2rem;
+      margin: 0.5rem 0;
     }
 
-    .person-info p {
-      margin: 0.3rem 0;
-      color: #444;
+    .pi-section p {
+      color: #333;
+      font-size: 1rem;
+      max-width: 700px;
+      text-align: center;
     }
 
-    .role {
-      font-style: italic;
+    .year-section {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .year-header {
+      color: var(--red);
+      border-bottom: 3px solid var(--red);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    .year-header:hover {
+      opacity: 0.85;
+    }
+
+    .toggle-icon {
+      font-size: 1.3rem;
+      transition: transform 0.3s;
+    }
+
+    .collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .member {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 1rem 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-4px);
+    }
+
+    .member strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .member span {
+      display: block;
       color: #666;
       font-size: 0.95rem;
     }
 
-    .error {
-      color: var(--red);
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    /* ---------- FOOTER ---------- */
     footer {
-      background: var(--offwhite);
-      padding: 2rem;
       text-align: center;
-      color: #666;
+      color: #777;
+      padding: 2rem;
       font-size: 0.9rem;
       border-top: 1px solid #ddd;
-      box-shadow: 0 -2px 6px var(--shadow);
+      margin-top: 4rem;
     }
 
     footer a {
       color: var(--red);
       text-decoration: none;
-      font-weight: 500;
     }
 
     footer a:hover {
       text-decoration: underline;
+    }
+
+    .error {
+      color: #B30838;
+      text-align: center;
+      margin: 2rem 0;
     }
   </style>
 </head>
 
 <body>
   <nav>
-    <a href="./" class="logo">Cortical Analysis Lab</a>
+    <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <ul>
       <li><a href="research.html">Research</a></li>
       <li><a href="people.html">People</a></li>
@@ -200,16 +231,13 @@
   </nav>
 
   <header>
-    <h1>People</h1>
-    <p>Our lab unites neuroscience, engineering, and computational expertise to explore how the brain integrates neural and vascular activity.</p>
+    <h1>Our Team</h1>
+    <p>Meet the members of the Cortical Analysis Lab — exploring brain, behavior, and neurovascular integration.</p>
   </header>
 
-  <section>
-    <h2>Lab Members</h2>
-    <div id="people-container">
-      <p>Loading people...</p>
-    </div>
-  </section>
+  <main id="people-container">
+    <p style="text-align:center;">Loading lab members...</p>
+  </main>
 
   <footer>
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
@@ -222,35 +250,75 @@
       const container = document.getElementById("people-container");
       try {
         const response = await fetch("data/people.json");
-        if (!response.ok) throw new Error("Network response not OK");
-        const people = await response.json();
+        if (!response.ok) throw new Error("Failed to fetch JSON");
+        const data = await response.json();
 
-        container.innerHTML = "";
+        // === PI Section ===
+        let html = `
+          <section class="pi-section">
+            <img src="${data.pi.image}" alt="${data.pi.name}">
+            <h2>${data.pi.name}</h2>
+            <strong>${data.pi.role}</strong>
+            <p>${data.pi.bio}</p>
+          </section>
+          <div class="separator"></div>
+        `;
 
-        people.forEach(person => {
-          const imgSrc = person.image || "assets/default-profile.png";
-          const link = person.link ? `<p><a href="${person.link}" target="_blank">View profile →</a></p>` : "";
-
-          const html = `
-            <div class="card">
-              <div class="person">
-                <img src="${imgSrc}" alt="${person.name}">
-                <div class="person-info">
-                  <h3>${person.name}</h3>
-                  <p class="role">${person.role || ""}</p>
-                  <p>${person.bio || ""}</p>
-                  ${link}
-                </div>
-              </div>
-            </div>
-          `;
-          container.insertAdjacentHTML("beforeend", html);
+        // === Group members by academic year ===
+        const grouped = {};
+        data.members.forEach(m => {
+          if (!grouped[m.academic_year]) grouped[m.academic_year] = [];
+          grouped[m.academic_year].push(m);
         });
 
-      } catch (error) {
-        console.error("Error loading people:", error);
-        container.innerHTML = `<p class="error">⚠️ Error loading people: Unable to load <code>data/people.json</code></p>`;
+        // Sort academic years descending (newest first)
+        const sortedYears = Object.keys(grouped).sort((a, b) => {
+          const aYear = parseInt(a.split("–")[0]);
+          const bYear = parseInt(b.split("–")[0]);
+          return bYear - aYear;
+        });
+
+        // === Generate HTML for each academic year ===
+        sortedYears.forEach((year, i) => {
+          const members = grouped[year].map(m => `
+            <div class="member">
+              <strong>${m.name}</strong>
+              <span>${m.major}</span>
+              <span>${m.role}</span>
+            </div>`).join('');
+
+          // collapse all except most recent year
+          const display = i === 0 ? "grid" : "none";
+          const icon = i === 0 ? "▼" : "►";
+
+          html += `
+            <section class="year-section">
+              <div class="year-header" onclick="toggleYear('${year}')">
+                ${year} <span class="toggle-icon" id="icon-${year}">${icon}</span>
+              </div>
+              <div class="members-grid" id="group-${year}" style="display:${display}">
+                ${members}
+              </div>
+            </section>
+          `;
+          if (i < sortedYears.length - 1) html += `<div class="separator"></div>`;
+        });
+
+        container.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p class="error">⚠️ Unable to load people data.</p>`;
       }
+    }
+
+    function toggleYear(year) {
+      const group = document.getElementById(`group-${year}`);
+      const icon = document.getElementById(`icon-${year}`);
+      if (!group) return;
+      const isVisible = group.style.display !== "none";
+      group.style.display = isVisible ? "none" : "grid";
+      icon.textContent = isVisible ? "►" : "▼";
     }
 
     loadPeople();
