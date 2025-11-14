@@ -1,1 +1,1 @@
-json(concat('{"pi":', string(body('Parse_JSON')?['pi']), ',"members":', json(string(variables('peopleArray'))), '}')) 
+{"members":[]}
