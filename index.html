@@ -10,7 +10,7 @@
     :root {
       --red: #B30838;
       --offwhite: #faf7f5;
-      --text: #222;
+      --text: #1a1a1a;
     }
 
     * {
@@ -40,7 +40,7 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      opacity: 0.3; /* Stronger watermark */
+      opacity: 0.3; /* stronger watermark */
       mix-blend-mode: multiply;
       filter: brightness(1.05) contrast(1.1);
       z-index: -1;
@@ -113,17 +113,17 @@
       max-width: 700px;
       margin: auto;
       font-size: 1.1rem;
-      color: #444;
+      color: #333;
     }
 
-    /* 💫 Slightly more transparent text boxes */
+    /* 💫 More transparent content boxes */
     section {
       max-width: 900px;
       margin: 4rem auto;
       padding: 0 2rem;
-      background: rgba(255, 255, 255, 0.45); /* was 0.6 */
+      background: rgba(255, 255, 255, 0.25); /* was 0.45 */
       border-radius: 12px;
-      backdrop-filter: blur(5px); /* subtle soft blur */
+      backdrop-filter: blur(4px); /* light blur for readability */
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
@@ -136,12 +136,13 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.5); /* was 0.7 */
+      background: rgba(255, 255, 255, 0.3); /* lighter, more transparent */
       border-radius: 10px;
       padding: 1.5rem 2rem;
       margin-bottom: 2rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(3px);
+      color: #1a1a1a;
     }
 
     .card:hover {
@@ -150,14 +151,14 @@
     }
 
     footer {
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.8);
       padding: 2rem;
       text-align: center;
-      color: #555;
+      color: #444;
       font-size: 0.9rem;
       border-top: 1px solid rgba(0,0,0,0.1);
       margin-top: 4rem;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(5px);
     }
 
     footer a {
