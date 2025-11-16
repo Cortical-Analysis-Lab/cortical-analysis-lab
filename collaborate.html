@@ -6,36 +6,6 @@
   <title>Collaborate | Cortical Analysis Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
-  <style>
-    iframe {
-      width: 100%;
-      height: 900px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(6px);
-    }
-
-    .form-container {
-      max-width: 900px;
-      margin: 2rem auto 4rem;
-      padding: 0 2rem;
-    }
-
-    .note {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      iframe {
-        height: 1100px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -49,27 +19,48 @@
       <li><a href="people.html">People</a></li>
       <li><a href="publications.html">Publications</a></li>
       <li><a href="collaborate.html" class="active">Collaborate</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- 🧠 Header -->
+  <!-- 🤝 Header -->
   <header>
-    <h1>Collaborate with Us</h1>
+    <h1>Collaborate With Us</h1>
     <p>
-      The Cortical Analysis Lab welcomes collaborative research proposals from students, 
-      scientists, and organizations interested in neuroscience, imaging, and translational work. 
-      Please complete the form below to share your ideas or request a project discussion.
+      We’re always interested in partnerships and interdisciplinary collaborations
+      that advance neuroscience research, education, and technology development.
     </p>
   </header>
 
-  <!-- 💬 Embedded Form -->
-  <section class="form-container">
-    <iframe 
-      src="https://forms.office.com/Pages/ResponsePage.aspx?id=xFmCf5HE9Uel5amfUya5dtOnRTL3wXpCuzkbmFVDdSxUMTRUVzM1Rkw5MEpKOFJNUEFSQUVUNjBQUy4u"
-      title="Collaboration Proposal Form"
-      allowfullscreen>
-    </iframe>
-    <p class="note">Your submission will be securely stored via Microsoft Forms.</p>
+  <!-- 🧩 Collaboration Info -->
+  <section>
+    <div class="card">
+      <h2>Join Our Efforts</h2>
+      <p>
+        Whether you’re a researcher, student, or organization, the Cortical Analysis Lab welcomes 
+        collaborative opportunities that integrate behavioral, optical, and EEG methods. 
+        Fill out the form below to share your ideas, interests, or proposals.
+      </p>
+    </div>
+  </section>
+
+  <!-- 📋 Microsoft Form Embed -->
+  <section>
+    <div class="card" style="text-align:center;">
+      <iframe 
+        src="https://forms.office.com/Pages/ResponsePage.aspx?id=xFmCf5HE9Uel5amfUya5dtOnRTL3wXpCuzkbmFVDdSxUMTRUVzM1Rkw5MEpKOFJNUEFSQUVUNjBQUy4u&embed=true"
+        width="100%"
+        height="900"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="border: none; border-radius: 12px; background: rgba(255,255,255,0.7);"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen>
+      </iframe>
+    </div>
   </section>
 
   <!-- 📬 Footer -->
@@ -77,10 +68,10 @@
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
 
-  <!-- 📜 JS for mobile nav -->
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Mobile navigation toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav ul');
     menuToggle.addEventListener('click', () => {
