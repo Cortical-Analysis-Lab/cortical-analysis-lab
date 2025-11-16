@@ -6,8 +6,8 @@
 :root {
   --red: #B30838;          /* Sacred Heart red */
   --offwhite: #faf7f5;     /* Soft off-white background */
-  --text: #222;
-  --gray: #555;
+  --text: #222;            /* Main text */
+  --gray: #555;            /* Secondary text */
 }
 
 /* --- Base Styles --- */
@@ -18,18 +18,21 @@
 
 body {
   margin: 0;
-  padding-top: 80px; /* Prevent content hiding behind navbar */
+  padding-top: 80px; /* Prevent content from hiding behind nav */
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+
+  /* 🔥 Watermark background effect */
   background-color: var(--offwhite);
   background-image: url('../assets/Lab%20Website%20Background.png');
   background-repeat: no-repeat;
-  background-position: center center;
   background-attachment: fixed;
-  background-size: 95%;        /* ⬅️ full logo visible without repeating */
-  background-blend-mode: luminosity;
+  background-position: center center;
+  background-size: 85%;
+  background-blend-mode: multiply;
   opacity: 1;
-  color: var(--text);
-  font-family: "Inter", sans-serif;
-  line-height: 1.6;
+  filter: brightness(1.05) contrast(1.05);
 }
 
 /* --- Navigation Bar --- */
@@ -46,6 +49,7 @@ nav {
   padding: 1rem 2rem;
   z-index: 1000;
   transition: box-shadow 0.3s ease, background 0.3s ease;
+  animation: fadeInNav 0.5s ease forwards;
 }
 
 nav.scrolled {
@@ -61,6 +65,7 @@ nav .logo {
   letter-spacing: 1px;
 }
 
+/* --- Nav Links --- */
 nav ul {
   list-style: none;
   display: flex;
@@ -96,11 +101,64 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-/* --- Header Section --- */
+/* --- Responsive Hamburger Menu --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0.8rem 1rem;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(250, 247, 245, 0.97);
+    backdrop-filter: blur(6px);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  nav ul.show {
+    display: flex;
+    animation: slideDown 0.25s ease;
+  }
+
+  nav ul li {
+    margin: 0.8rem 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header --- */
 header {
   text-align: center;
   padding: 10rem 2rem 6rem;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(4px);
 }
 
@@ -126,7 +184,7 @@ section {
 
 /* --- Cards --- */
 .card {
-  background: rgba(255, 255, 255, 0.55); /* more translucent to reveal watermark */
+  background: rgba(255, 255, 255, 0.55);
   border-radius: 12px;
   padding: 1.5rem 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -136,7 +194,7 @@ section {
 
 .card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
 }
 
 /* --- Headings --- */
@@ -187,28 +245,8 @@ a.button:hover {
   transform: translateY(-2px);
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  header {
-    padding: 8rem 1rem 4rem;
-  }
-
-  section {
-    margin: 2rem auto;
-  }
-}
-
-/* --- Subtle Fade & Shadow on Scroll --- */
+/* --- Animation --- */
 @keyframes fadeInNav {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-nav {
-  animation: fadeInNav 0.5s ease forwards;
 }
