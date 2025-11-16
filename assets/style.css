@@ -6,8 +6,8 @@
 :root {
   --red: #B30838;          /* Sacred Heart red */
   --offwhite: #faf7f5;     /* Soft off-white background */
-  --text: #222;            /* Main text */
-  --gray: #555;            /* Secondary text */
+  --text: #222;
+  --gray: #555;
 }
 
 /* --- Base Styles --- */
@@ -18,10 +18,15 @@
 
 body {
   margin: 0;
-  padding-top: 80px; /* ✅ Prevent content from hiding behind fixed navbar */
-  background: var(--offwhite) url('../assets/Lab%20Website%20Background.png')
-              no-repeat center center fixed;
-  background-size: cover;
+  padding-top: 80px; /* Prevent content hiding behind navbar */
+  background-color: var(--offwhite);
+  background-image: url('../assets/Lab%20Website%20Background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: 95%;        /* ⬅️ full logo visible without repeating */
+  background-blend-mode: luminosity;
+  opacity: 1;
   color: var(--text);
   font-family: "Inter", sans-serif;
   line-height: 1.6;
@@ -32,7 +37,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(250, 247, 245, 0.8);
+  background: rgba(250, 247, 245, 0.85);
   backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -43,7 +48,6 @@ nav {
   transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
-/* Slight darken when scrolling */
 nav.scrolled {
   background: rgba(250, 247, 245, 0.95);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -96,6 +100,8 @@ nav ul li a:hover::after {
 header {
   text-align: center;
   padding: 10rem 2rem 6rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
 }
 
 header h1 {
@@ -120,17 +126,17 @@ section {
 
 /* --- Cards --- */
 .card {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.55); /* more translucent to reveal watermark */
   border-radius: 12px;
   padding: 1.5rem 2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
   transition: transform 0.2s ease, background 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 /* --- Headings --- */
@@ -150,7 +156,7 @@ footer {
   text-align: center;
   color: var(--gray);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 footer a {
