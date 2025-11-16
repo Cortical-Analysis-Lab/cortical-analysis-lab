@@ -14,8 +14,9 @@
       padding: 0 1.5rem;
     }
 
+    /* PI card at the top */
     .person-card {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       border-radius: 12px;
       text-align: center;
       padding: 2rem;
@@ -25,8 +26,8 @@
     }
 
     .person-card img {
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       border: 3px solid var(--red);
       object-fit: cover;
@@ -51,6 +52,7 @@
       margin: 3rem 0 2rem;
     }
 
+    /* Year dropdowns */
     details {
       background: rgba(255, 255, 255, 0.6);
       border-radius: 10px;
@@ -72,21 +74,22 @@
       color: #8a062c;
     }
 
-    .year-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 0.5rem;
+    /* Year lists */
+    ul.people-list {
+      list-style: none;
+      margin: 0.5rem 0 0 0;
+      padding: 0;
+      columns: 3; /* three columns */
+      column-gap: 2rem;
     }
 
-    .person-entry {
-      background: rgba(255,255,255,0.5);
-      border-radius: 8px;
-      padding: 0.7rem 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    ul.people-list li {
+      margin: 0.4rem 0;
+      color: #333;
+      break-inside: avoid-column;
     }
 
-    .person-entry strong {
+    ul.people-list strong {
       color: var(--red);
     }
 
@@ -96,9 +99,9 @@
       margin-top: 2rem;
     }
 
-    @media (max-width: 600px) {
-      .year-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+      ul.people-list {
+        columns: 1;
       }
     }
   </style>
@@ -144,6 +147,7 @@
 
     async function loadPeople() {
       const container = document.getElementById("people-container");
+
       try {
         const jsonURL = "https://cortical-analysis-lab.github.io/CorticalAnalysisLab/data/people.json?v=" + Date.now();
         console.log("🔍 Fetching JSON from:", jsonURL);
@@ -156,7 +160,7 @@
         const pi = people.find(p => p.name.toLowerCase().includes("shaun"));
         const others = people.filter(p => !p.name.toLowerCase().includes("shaun"));
 
-        // ✅ Group by academic year starting from 2023–2024
+        // ✅ Group by academic year (starting 2023–2024)
         const grouped = {};
         others.forEach(p => {
           const year = p.year ? parseInt(p.year) : 2023;
@@ -177,7 +181,7 @@
           card.innerHTML = `
             <img src="${pi.image || 'assets/default-profile.png'}" alt="${pi.name}">
             <h3>${pi.name}</h3>
-            <p>${pi.role || ''}</p>
+            <p><strong>${pi.role || ''}</strong></p>
             <p>${pi.bio || ''}</p>
           `;
           container.appendChild(card);
@@ -188,22 +192,23 @@
         divider.className = "red-divider";
         container.appendChild(divider);
 
-        // 📅 Academic Year Sections (3-column layout)
-        sortedYears.forEach(year => {
+        // 📅 Academic Year Sections (no images)
+        sortedYears.forEach((year, index) => {
           const section = document.createElement("details");
           const nextYear = year + 1;
+
+          // ✅ Open the most recent year
+          if (index === 0) section.setAttribute("open", "true");
+
           section.innerHTML = `
             <summary>${year} – ${nextYear}</summary>
-            <div class="year-grid">
+            <ul class="people-list">
               ${grouped[year]
                 .map(p => `
-                  <div class="person-entry">
-                    <strong>${p.name}</strong><br>
-                    ${p.major ? `${p.major}` : ""}${p.role ? ` (${p.role})` : ""}
-                  </div>
+                  <li><strong>${p.name}</strong><br>${p.major || ''}${p.role ? ` — ${p.role}` : ''}</li>
                 `)
                 .join("")}
-            </div>
+            </ul>
           `;
           container.appendChild(section);
         });
@@ -222,7 +227,7 @@
 
     loadPeople();
 
-    // Mobile menu
+    // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav ul');
     menuToggle.addEventListener('click', () => {
