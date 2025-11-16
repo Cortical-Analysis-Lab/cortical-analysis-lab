@@ -4,47 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cortical Analysis Lab | Sacred Heart University</title>
+
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/background.css">
 
   <style>
-    :root {
-      --red: #B30838;
-      --offwhite: #faf7f5;
-      --text: #1a1a1a;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
-      background-color: var(--offwhite);
-      line-height: 1.6;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* 🌟 Full-sized textured watermark background */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("assets/Lab Website Background.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      opacity: 0.3; /* stronger watermark */
-      mix-blend-mode: multiply;
-      filter: brightness(1.05) contrast(1.1);
-      z-index: -1;
-    }
+    /* ============================================
+       Navigation & Page Structure
+       ============================================ */
 
     nav {
       position: fixed;
@@ -116,38 +84,12 @@
       color: #333;
     }
 
-    /* 💫 More transparent content boxes */
-    section {
-      max-width: 900px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      background: rgba(255, 255, 255, 0.25); /* was 0.45 */
-      border-radius: 12px;
-      backdrop-filter: blur(4px); /* light blur for readability */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
     h2 {
       color: var(--red);
       margin-bottom: 1rem;
       border-bottom: 2px solid var(--red);
       display: inline-block;
       padding-bottom: 4px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.3); /* lighter, more transparent */
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      backdrop-filter: blur(3px);
-      color: #1a1a1a;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
 
     footer {
@@ -174,6 +116,7 @@
 
 <body>
 
+  <!-- 🧭 Navigation -->
   <nav>
     <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <ul>
@@ -185,11 +128,13 @@
     </ul>
   </nav>
 
+  <!-- 🧠 Hero Section -->
   <header>
     <h1>Cortical Analysis Lab</h1>
     <p>Exploring the interplay between cortical dynamics, neurovascular coupling, and behavior through multimodal imaging, EEG, and computational analysis.</p>
   </header>
 
+  <!-- 🔬 Research Focus -->
   <section>
     <h2>Our Focus</h2>
     <div class="card">
@@ -197,6 +142,7 @@
     </div>
   </section>
 
+  <!-- 📈 Highlights -->
   <section>
     <h2>Recent Highlights</h2>
     <div class="card">
@@ -204,6 +150,7 @@
     </div>
   </section>
 
+  <!-- 📬 Footer -->
   <footer>
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
