@@ -18,7 +18,8 @@
 
 body {
   margin: 0;
-  background: var(--offwhite) url('../assets/Lab%20Website%20Background.png') 
+  padding-top: 80px; /* ✅ Prevent content from hiding behind fixed navbar */
+  background: var(--offwhite) url('../assets/Lab%20Website%20Background.png')
               no-repeat center center fixed;
   background-size: cover;
   color: var(--text);
@@ -33,12 +34,19 @@ nav {
   width: 100%;
   background: rgba(250, 247, 245, 0.8);
   backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   z-index: 1000;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Slight darken when scrolling */
+nav.scrolled {
+  background: rgba(250, 247, 245, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 nav .logo {
@@ -179,7 +187,7 @@ a.button:hover {
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   header {
     padding: 8rem 1rem 4rem;
   }
@@ -187,4 +195,14 @@ a.button:hover {
   section {
     margin: 2rem auto;
   }
+}
+
+/* --- Subtle Fade & Shadow on Scroll --- */
+@keyframes fadeInNav {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+nav {
+  animation: fadeInNav 0.5s ease forwards;
 }
