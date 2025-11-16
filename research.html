@@ -1,158 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research | Cortical Analysis Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --red: #B30838;
-      --offwhite: #faf7f5;
-      --text: #222;
-      --shadow: rgba(0,0,0,0.05);
-    }
-
-    body {
-      margin: 0;
-      background: var(--offwhite);
-      color: var(--text);
-      font-family: "Inter", sans-serif;
-      line-height: 1.6;
-    }
-
-    /* ---------- NAVIGATION ---------- */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--offwhite);
-      box-shadow: 0 2px 6px var(--shadow);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      z-index: 100;
-    }
-
-    nav .logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--red);
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-    }
-
-    nav ul li a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--red);
-      transition: width 0.3s ease;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    /* ---------- HEADER ---------- */
-    header {
-      text-align: center;
-      padding: 9rem 2rem 5rem;
-      background: var(--offwhite);
-    }
-
-    header h1 {
-      color: var(--red);
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      max-width: 700px;
-      margin: auto;
-      font-size: 1.1rem;
-      color: #444;
-    }
-
-    /* ---------- SECTION LAYOUT ---------- */
-    section {
-      max-width: 950px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    h2 {
-      color: var(--red);
-      margin-bottom: 1rem;
-      border-bottom: 2px solid var(--red);
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-
-    .card {
-      background: var(--offwhite);
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 4px 10px var(--shadow);
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    }
-
-    .highlight {
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      background: var(--offwhite);
-      padding: 2rem;
-      text-align: center;
-      color: #666;
-      font-size: 0.9rem;
-      border-top: 1px solid #ddd;
-      box-shadow: 0 -2px 6px var(--shadow);
-    }
-
-    footer a {
-      color: var(--red);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
+
+  <!-- 🧭 Navigation -->
   <nav>
-    <a href="./" class="logo">Cortical Analysis Lab</a>
+    <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <ul>
       <li><a href="research.html">Research</a></li>
       <li><a href="people.html">People</a></li>
@@ -162,49 +22,69 @@
     </ul>
   </nav>
 
+  <!-- 🔬 Research Overview -->
   <header>
     <h1>Research</h1>
-    <p>Our lab investigates the dynamic relationships between neural activity, glial signaling, and vascular function — exploring how these interactions drive behavior and brain health.</p>
+    <p>
+      Our lab studies the dynamic interplay between neural, glial, and vascular systems that shape cortical function. 
+      Using multimodal imaging, electrophysiology, and behavioral tracking, we aim to uncover how brain states 
+      emerge from complex biological coordination.
+    </p>
   </header>
 
+  <!-- 🧠 Section: Neural–Vascular Coupling -->
   <section>
-    <h2>Research Areas</h2>
-
+    <h2>Neurovascular Coupling</h2>
     <div class="card">
-      <p><span class="highlight">Neurovascular Coupling:</span> Understanding how neuronal firing and hemodynamic responses interact under different behavioral and physiological states using optical imaging and EEG synchronization.</p>
-    </div>
-
-    <div class="card">
-      <p><span class="highlight">Cortical State Dynamics:</span> Quantifying large-scale oscillatory and metabolic changes that underlie transitions between alertness, rest, and anesthesia.</p>
-    </div>
-
-    <div class="card">
-      <p><span class="highlight">Behavioral Correlates:</span> Relating multimodal brain signals to spatial exploration, decision-making, and anxiety-related behavior through advanced tracking paradigms such as the open field, zero maze, and object recognition tests.</p>
+      <p>
+        We investigate how neuronal activity drives vascular responses at multiple scales. 
+        Through wide-field optical imaging (Ca/CBV) and EEG, our experiments measure how oxygenation and neural activation 
+        synchronize across cortical regions. This work enhances understanding of brain energy dynamics, 
+        and informs translational models of neurological and psychiatric disorders.
+      </p>
     </div>
   </section>
 
+  <!-- 🧬 Section: Behavior & Brain States -->
   <section>
-    <h2>Methods & Technology</h2>
-
+    <h2>Behavioral Correlates of Cortical Activity</h2>
     <div class="card">
-      <p>Our integrated pipeline combines <span class="highlight">widefield optical imaging, EEG acquisition, and behavioral video tracking</span> in synchronized, timestamp-aligned systems. 
-      All data are analyzed using in-house MATLAB and Python tools for motion correction, signal normalization, and multimodal correlation mapping.</p>
-    </div>
-
-    <div class="card">
-      <p>Recent technical developments include custom <span class="highlight">Nicla Vision–based imaging modules</span> for wireless acquisition, optimized <span class="highlight">LED excitation arrays</span>, and 
-      open-source <span class="highlight">EEG–behavior analysis toolkits</span> for signal classification and state segmentation.</p>
+      <p>
+        Our behavioral tracking systems link real-time movement and decision-making with neural patterns. 
+        We analyze open-field exploration, zero maze, and object interaction tests to quantify the 
+        neural signatures of anxiety, curiosity, and habituation. 
+        These paradigms are integrated with optical and EEG modalities to build comprehensive models of behavior–brain coupling.
+      </p>
     </div>
   </section>
 
+  <!-- ⚡ Section: Multimodal Integration -->
   <section>
-    <h2>Future Directions</h2>
+    <h2>Multimodal Data Integration</h2>
     <div class="card">
-      <p>Our upcoming work will extend multimodal measurements to awake, freely behaving animals to study neural–vascular integration during naturalistic tasks. 
-      These studies aim to establish predictive biomarkers of brain states relevant to <span class="highlight">neurodevelopmental and psychiatric disorders</span>.</p>
+      <p>
+        By combining wide-field optical imaging, EEG, and computational models, we create a unified framework 
+        for analyzing large-scale cortical dynamics. Our pipelines include automated motion tracking, 
+        state segmentation, and cross-modal time-series correlation. 
+        These tools are being developed as open-source frameworks for the neuroscience community.
+      </p>
     </div>
   </section>
 
+  <!-- 💡 Section: Translational Applications -->
+  <section>
+    <h2>Translational and Therapeutic Insights</h2>
+    <div class="card">
+      <p>
+        We aim to connect fundamental neuroscience to clinical outcomes. 
+        By mapping cortical biomarkers of plasticity, stress response, and altered neurovascular signaling, 
+        we hope to advance translational research relevant to developmental, behavioral, and neurodegenerative disorders. 
+        Our long-term goal is to build predictive and therapeutic models for brain health and recovery.
+      </p>
+    </div>
+  </section>
+
+  <!-- 📬 Footer -->
   <footer>
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
@@ -212,5 +92,6 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
