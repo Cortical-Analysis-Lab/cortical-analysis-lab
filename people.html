@@ -56,6 +56,13 @@
       font-size: 0.95rem;
     }
 
+    .debug-line {
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
     .error {
       text-align: center;
       color: var(--red);
@@ -69,9 +76,10 @@
   <!-- 🧭 Navigation -->
   <nav>
     <a href="index.html" class="logo">Cortical Analysis Lab</a>
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
     <ul>
       <li><a href="research.html">Research</a></li>
-      <li><a href="people.html">People</a></li>
+      <li><a href="people.html" class="active">People</a></li>
       <li><a href="publications.html">Publications</a></li>
       <li><a href="collaborate.html">Collaborate</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -93,6 +101,7 @@
     <div id="people-container" class="people-grid">
       <p>Loading lab members...</p>
     </div>
+    <div id="debug-line" class="debug-line"></div>
   </section>
 
   <!-- 📬 Footer -->
@@ -100,15 +109,28 @@
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
 
+  <!-- 📜 JS: Load JSON + Mobile Nav -->
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
     async function loadPeople() {
       const container = document.getElementById("people-container");
+      const debugLine = document.getElementById("debug-line");
+
       try {
-        // Adjust path as needed based on your repo structure
-        const response = await fetch("data/people.json");
-        if (!response.ok) throw new Error("Failed to load JSON");
+        // ✅ Adaptive path for GitHub Pages vs local preview
+        const jsonPath = window.location.hostname.includes("github.io")
+          ? "data/people.json"
+          : "./data/people.json";
+
+        const response = await fetch(jsonPath);
+        if (!response.ok) throw new Error(`Fetch failed (${response.status})`);
 
         const people = await response.json();
         container.innerHTML = "";
@@ -125,13 +147,17 @@
           container.appendChild(card);
         });
 
-        if (people.length === 0) {
+        if (people.length > 0) {
+          debugLine.textContent = `✅ Loaded ${people.length} lab members from data/people.json`;
+        } else {
           container.innerHTML = "<p>No team members found.</p>";
+          debugLine.textContent = "⚠️ JSON loaded but contained 0 members.";
         }
 
       } catch (err) {
         console.error("Error loading people:", err);
         container.innerHTML = `<p class="error">⚠️ Unable to load lab members. Please check <code>data/people.json</code>.</p>`;
+        debugLine.textContent = "❌ Failed to fetch data/people.json";
       }
     }
 
