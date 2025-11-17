@@ -276,6 +276,16 @@ a.button:hover {
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  body::before {
+    opacity: 0.36;  /* boost image strength ONLY on mobile */
+  }
+  
+  body::after {
+    background: rgba(255, 255, 255, 0.18); /* reduce veil slightly */
+  }
+}
+
 /* =====================================================
    ✨ ANIMATIONS
    ===================================================== */
