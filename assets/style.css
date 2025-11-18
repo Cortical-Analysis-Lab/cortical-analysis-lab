@@ -216,8 +216,8 @@ details {
    👤 HIGH-QUALITY PROFILE IMAGE
    ===================================================== */
 .person-card img {
-  width: 220px;
-  height: 220px;
+  width: 440px;
+  height: 440px;
 
   /* Use mask instead of border-radius */
   --r: 50%;
