@@ -8,14 +8,58 @@
   <link rel="stylesheet" href="assets/style.css">
 
   <style>
-    /* --- Page-specific styling --- */
+    /* --- Page-specific layout only (NO global overrides) --- */
     .people-container {
       max-width: 900px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
 
-    
+    /* PI card container only (not overriding global card styles) */
+    .person-card {
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* High-quality profile image (allowed & non-conflicting) */
+    .person-card img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid var(--red);
+      object-fit: cover;
+
+      /* Your custom positioning */
+      object-position: 60% 30%;
+      margin-bottom: 1rem;
+
+      /* Quality settings (only applies to this image) */
+      image-rendering: auto;
+    }
+
+    /* Desktop-only sharpening */
+    @media (min-width: 769px) {
+      .person-card img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+    }
+
+    .person-card h3 {
+      color: var(--red);
+      font-size: 1.4rem;
+      margin: 0.5rem 0;
+    }
+
+    .person-card p {
+      color: #333;
+      font-size: 1rem;
+      margin: 0.3rem 0;
+    }
+
     hr.red-divider {
       border: none;
       border-top: 3px solid var(--red);
@@ -24,12 +68,9 @@
 
     /* Year dropdowns */
     details {
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 12px;
-      margin-bottom: 2rem;
       padding: 1rem 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      backdrop-filter: blur(4px);
+      margin-bottom: 2rem;
+      border-radius: 12px;
     }
 
     summary {
@@ -37,13 +78,10 @@
       color: var(--red);
       font-size: 1.1rem;
       cursor: pointer;
-      outline: none;
       margin-bottom: 1rem;
     }
 
-    summary:hover {
-      color: #8a062c;
-    }
+    summary:hover { color: #8a062c; }
 
     /* Year lists */
     ul.people-list {
@@ -57,21 +95,20 @@
     ul.people-list li {
       margin-bottom: 1rem;
       color: #333;
-      break-inside: avoid-column;
       font-size: 1rem;
       line-height: 1.4;
+      break-inside: avoid-column;
     }
 
     ul.people-list strong {
       color: var(--red);
-      display: block;
       font-weight: 600;
+      display: block;
     }
 
     ul.people-list span.major,
     ul.people-list span.role {
       display: block;
-      color: #333;
       font-weight: 400;
     }
 
@@ -88,7 +125,7 @@
     <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
     <ul>
-      <li><a href="index.html">Home</a></li> <!-- NEW HOME BUTTON -->
+      <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="people.html" class="active">People</a></li>
       <li><a href="publications.html">Publications</a></li>
@@ -124,16 +161,18 @@
       const container = document.getElementById("people-container");
 
       try {
-        const jsonURL = "https://cortical-analysis-lab.github.io/CorticalAnalysisLab/data/people.json?v=" + Date.now();
+        const jsonURL =
+          "https://cortical-analysis-lab.github.io/CorticalAnalysisLab/data/people.json?v=" +
+          Date.now();
+
         const response = await fetch(jsonURL);
-        if (!response.ok) throw new Error("Failed to load JSON (" + response.status + ")");
+        if (!response.ok) throw new Error("Failed to load JSON");
+
         const people = await response.json();
 
-        // Separate PI and others
         const pi = people.find(p => p.name.toLowerCase().includes("shaun"));
         const others = people.filter(p => !p.name.toLowerCase().includes("shaun"));
 
-        // Group by academic year
         const grouped = {};
         others.forEach(p => {
           const year = p.year ? parseInt(p.year) : 2023;
@@ -151,6 +190,7 @@
         if (pi) {
           const card = document.createElement("div");
           card.className = "person-card";
+
           card.innerHTML = `
             <img src="${pi.image || 'assets/default-profile.png'}" alt="${pi.name}">
             <h3>${pi.name}</h3>
@@ -160,7 +200,9 @@
           container.appendChild(card);
         }
 
-        container.appendChild(Object.assign(document.createElement("hr"), { className: "red-divider" }));
+        container.appendChild(Object.assign(document.createElement("hr"), {
+          className: "red-divider"
+        }));
 
         /* --- Year sections --- */
         sortedYears.forEach((year, index) => {
@@ -171,18 +213,24 @@
           section.innerHTML = `
             <summary>${year} – ${nextYear}</summary>
             <ul class="people-list">
-              ${grouped[year].map(p => `
+              ${grouped[year]
+                .map(
+                  p => `
                 <li>
                   <strong>${p.name}</strong>
                   <span class="major">${p.major || ''}</span>
                   <span class="role">${p.role || ''}</span>
-                </li>
-              `).join("")}
+                </li>`
+                )
+                .join("")}
             </ul>
           `;
 
           container.appendChild(section);
-          container.appendChild(Object.assign(document.createElement("hr"), { className: "red-divider" }));
+
+          container.appendChild(Object.assign(document.createElement("hr"), {
+            className: "red-divider"
+          }));
         });
 
       } catch (err) {
