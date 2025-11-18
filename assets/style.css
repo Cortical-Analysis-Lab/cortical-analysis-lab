@@ -218,15 +218,19 @@ details {
 .person-card img {
   width: 220px;
   height: 220px;
-  border-radius: 50%;
-  border: 4px solid var(--red);
 
-  /* Render & position */
+  /* Use mask instead of border-radius */
+  --r: 50%;
+  -webkit-mask-image: radial-gradient(circle var(--r), black 99%, transparent 100%);
+  mask-image: radial-gradient(circle var(--r), black 99%, transparent 100%);
+
   object-fit: cover;
-  object-position: 60% 25%; /* shift right + slightly upward */
-  image-rendering: auto;
-  margin-bottom: 1rem;
+  object-position: 60% 25%;
 
+  border: 4px solid var(--red);
+  border-radius: 50%; /* keep this for layout only */
+
+  image-rendering: auto;
   backface-visibility: hidden;
   transform: translateZ(0);
 }
