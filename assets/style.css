@@ -31,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 
-/* 🧠 Background image — visible but non-intrusive */
+/* Background image */
 body::before {
   content: "";
   position: fixed;
@@ -48,7 +48,7 @@ body::before {
   z-index: -2;
 }
 
-/* ✨ Soft readability layer over the background */
+/* Soft readability veil */
 body::after {
   content: "";
   position: fixed;
@@ -56,7 +56,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.20); 
+  background: rgba(255, 255, 255, 0.20);
   backdrop-filter: blur(2px);
   z-index: -1;
 }
@@ -93,7 +93,7 @@ nav .logo {
   letter-spacing: 1px;
 }
 
-/* --- Nav Links --- */
+/* Nav links */
 nav ul {
   list-style: none;
   display: flex;
@@ -127,9 +127,7 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-/* =====================================================
-   📱 MOBILE NAVIGATION
-   ===================================================== */
+/* Mobile nav */
 .menu-toggle {
   display: none;
   background: none;
@@ -201,7 +199,7 @@ section {
 }
 
 /* =====================================================
-   🧩 CLEAN TRANSPARENT CARD STYLES
+   🧩 CLEAN TRANSPARENT CARDS
    ===================================================== */
 .card,
 .person-card,
@@ -221,21 +219,27 @@ details {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border: 3px solid var(--red);
+  border: 4px solid var(--red);
 
-  /* High-quality rendering */
+  /* Render & position */
   object-fit: cover;
-  object-position: 60% 22%; 
+  object-position: 60% 25%; /* shift right + slightly upward */
   image-rendering: auto;
-  -webkit-optimize-contrast: none;
+  margin-bottom: 1rem;
 
   backface-visibility: hidden;
   transform: translateZ(0);
-
-  margin-bottom: 1rem;
 }
 
-/* Hover effects */
+/* Desktop-only sharpening */
+@media (min-width: 769px) {
+  .person-card img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Hover */
 .card:hover,
 .person-card:hover,
 details:hover {
@@ -298,11 +302,11 @@ a.button:hover {
 }
 
 /* =====================================================
-   📱 MOBILE: RAW BACKGROUND IMAGE (no overlay)
+   📱 MOBILE: RAW BACKGROUND (no veil)
    ===================================================== */
 @media (max-width: 768px) {
   body::before {
-    opacity: 0.75; /* stronger visibility */
+    opacity: 0.75;
   }
 
   body::after {
