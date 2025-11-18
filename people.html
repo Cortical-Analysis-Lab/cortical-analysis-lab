@@ -26,12 +26,15 @@
     }
 
     .person-card img {
-      width: 140px;
-      height: 140px;
+      width: 200px;                /* much sharper */
+      height: 200px;
       border-radius: 50%;
       border: 3px solid var(--red);
       object-fit: cover;
+      object-position: 65% 25%;    /* shift right + slightly upward */
+      image-rendering: -webkit-optimize-contrast;
       margin-bottom: 1rem;
+
     }
 
     .person-card h3 {
