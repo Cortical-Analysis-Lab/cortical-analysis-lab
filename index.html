@@ -15,6 +15,7 @@
     <a href="index.html" class="logo">Cortical Analysis Lab</a>
     <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
     <ul>
+      <li><a href="index.html">Home</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="people.html">People</a></li>
       <li><a href="publications.html">Publications</a></li>
@@ -27,7 +28,8 @@
   <header>
     <h1>Cortical Analysis Lab</h1>
     <p>
-      Exploring the interplay between cortical dynamics, neurovascular coupling, and behavior through multimodal imaging, EEG, and computational analysis.
+      Exploring the interplay between cortical dynamics, neurovascular coupling, and behavior 
+      through multimodal imaging, EEG, and computational analysis.
     </p>
   </header>
 
@@ -36,7 +38,8 @@
     <h2>Our Focus</h2>
     <div class="card">
       <p>
-        We investigate how neural, glial, and vascular components interact during complex behavioral states, using synchronized optical imaging, EEG, and behavioral tracking systems.
+        We investigate how neural, glial, and vascular components interact during complex 
+        behavioral states, using synchronized optical imaging, EEG, and behavioral tracking systems.
       </p>
     </div>
   </section>
@@ -46,7 +49,9 @@
     <h2>Recent Highlights</h2>
     <div class="card">
       <p>
-        New multimodal EEG–optical imaging integration allows real-time mapping of cortical activation during behavior. Our latest preprints explore temporal correlations between hemodynamic and electrophysiological signatures in anesthetized mice.
+        New multimodal EEG–optical imaging integration enables real-time mapping of cortical activation 
+        during behavior. Our latest preprints explore temporal correlations between hemodynamic and 
+        electrophysiological signatures in anesthetized mice.
       </p>
     </div>
   </section>
@@ -57,17 +62,17 @@
   </footer>
 
   <script>
-    // ✅ Dynamic year
+    // Dynamic year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ✅ Mobile menu toggle
+    // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('nav ul');
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
     });
 
-    // ✅ Add scroll shadow effect
+    // Scroll shadow effect on nav bar
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
       if (window.scrollY > 20) {
