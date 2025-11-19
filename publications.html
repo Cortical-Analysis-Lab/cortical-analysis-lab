@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab Publications | Cortical Analysis Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <style>
+    .pub-list, .abs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .pub-item, .abs-item {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      backdrop-filter: blur(4px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pub-item:hover, .abs-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .pub-item h3, .abs-item h3 {
+      color: var(--red);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .significance-blurb {
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--red);
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🧭 Navigation -->
+  <nav>
+    <a href="index.html" class="logo">Cortical Analysis Lab</a>
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="people.html">People</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="publications.html" class="active">Lab Publications</a></li>
+      <li><a href="collaborate.html">Collaborate</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 📚 Header -->
+  <header>
+    <h1>Lab Publications</h1>
+    <p>
+      A curated collection of manuscripts, works in progress, and student-led research emerging from 
+      the Cortical Analysis Lab.
+    </p>
+  </header>
+
+
+  <!-- 📘 Lab Publications Section -->
+  <section>
+    <h2>Publications</h2>
+
+    <!-- Placeholder until you add content -->
+    <div class="card">
+      <p><em>Section under construction — stay tuned for upcoming manuscripts and analyses.</em></p>
+    </div>
+
+    <!-- Significance blurb -->
+    <div class="significance-blurb">
+      <strong>Significance:</strong>  
+      These publications represent ongoing efforts to advance multimodal neuroscience by integrating 
+      wide-field optical imaging, EEG, and behavioral analytics to better understand cortical function 
+      across developmental and translational contexts.
+      <br><em>(You may edit this text at any time.)</em>
+    </div>
+
+    <!-- Publications list (optional future expansion) -->
+    <div class="pub-list" id="lab-pub-list"></div>
+  </section>
+
+
+  <!-- 📊 Abstracts & Posters Section -->
+  <section>
+    <h2>Abstracts / Posters</h2>
+
+    <div class="card">
+      <p><em>Student and lab conference submissions will appear here. This section is also under construction.</em></p>
+    </div>
+
+    <!-- Significance blurb -->
+    <div class="significance-blurb">
+      <strong>Significance:</strong>  
+      These abstracts and posters highlight active student-driven and collaborative research lines, 
+      showcasing methodological development, experimental progress, and preliminary findings that guide 
+      the lab’s broader scientific direction.
+      <br><em>(Edit as needed.)</em>
+    </div>
+
+    <!-- Poster list -->
+    <div class="abs-list" id="poster-list"></div>
+  </section>
+
+
+  <!-- 📬 Footer -->
+  <footer>
+    © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+
+    // Optional future integration for JSON-driven publications
+    async function loadLabPublications() {
+      const pubList = document.getElementById("lab-pub-list");
+      try {
+        const response = await fetch("data/lab_publications.json");
+        if (!response.ok) return;
+
+        const pubs = await response.json();
+        pubList.innerHTML = "";
+
+        pubs.forEach(p => {
+          const item = document.createElement("div");
+          item.className = "pub-item";
+          item.innerHTML = `
+            <h3>${p.title}</h3>
+            <p><strong>${p.authors}</strong></p>
+            <p><em>${p.venue}</em>, ${p.year}</p>
+          `;
+          pubList.appendChild(item);
+        });
+      } catch (e) {
+        console.warn("No lab publications JSON found.");
+      }
+    }
+
+    async function loadPosters() {
+      const absList = document.getElementById("poster-list");
+      try {
+        const response = await fetch("data/posters.json");
+        if (!response.ok) return;
+
+        const posters = await response.json();
+        absList.innerHTML = "";
+
+        posters.forEach(p => {
+          const item = document.createElement("div");
+          item.className = "abs-item";
+          item.innerHTML = `
+            <h3>${p.title}</h3>
+            <p><strong>${p.authors}</strong></p>
+            <p><em>${p.conference}</em>, ${p.year}</p>
+          `;
+          absList.appendChild(item);
+        });
+      } catch (e) {
+        console.warn("No posters JSON found.");
+      }
+    }
+
+    loadLabPublications();
+    loadPosters();
+  </script>
+
+</body>
+</html>
