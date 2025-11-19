@@ -212,6 +212,13 @@ details {
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Add spacing between paragraphs inside cards */
+.card p {
+  margin-bottom: 1.1rem;  /* visible spacing */
+  line-height: 1.6;       /* improved readability */
+}
+
+
 /* =====================================================
    👤 HIGH-QUALITY PROFILE IMAGE
    ===================================================== */
