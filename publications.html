@@ -136,64 +136,57 @@
     © <span id="year"></span> Cortical Analysis Lab | Sacred Heart University
   </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+<script>
+  const ORCID = "0000-0003-4579-8793";
 
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('nav ul');
-    menuToggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+  async function loadORCID() {
+    const container = document.getElementById("pub-container");
 
-    // Optional future integration for JSON-driven publications
-    async function loadLabPublications() {
-      const pubList = document.getElementById("lab-pub-list");
-      try {
-        const response = await fetch("data/lab_publications.json");
-        if (!response.ok) return;
+    try {
+      const endpoint = `https://pub.orcid.org/v2.1/${ORCID}/works`;
 
-        const pubs = await response.json();
-        pubList.innerHTML = "";
+      const response = await fetch(endpoint, {
+        mode: "cors",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        }
+      });
 
-        pubs.forEach(p => {
-          const item = document.createElement("div");
-          item.className = "pub-item";
-          item.innerHTML = `
-            <h3>${p.title}</h3>
-            <p><strong>${p.authors}</strong></p>
-            <p><em>${p.venue}</em>, ${p.year}</p>
-          `;
-          pubList.appendChild(item);
-        });
-      } catch (e) {
-        console.warn("No lab publications JSON found.");
+      if (!response.ok) throw new Error("ORCID API error");
+
+      const data = await response.json();
+      const works = data.group || [];
+
+      container.innerHTML = "";
+
+      works.forEach(group => {
+        const summary = group["work-summary"][0];
+        const title = summary.title?.title?.value || "Untitled";
+        const journal = summary["journal-title"]?.value || "—";
+        const year = summary["publication-date"]?.year?.value || "—";
+
+        const item = document.createElement("div");
+        item.className = "pub-item";
+        item.innerHTML = `
+          <h3>${title}</h3>
+          <p><em>${journal}</em> (${year})</p>
+        `;
+        container.appendChild(item);
+      });
+
+      if (works.length === 0) {
+        container.innerHTML = "<p>No ORCID publications found.</p>";
       }
+
+    } catch (err) {
+      console.error(err);
+      container.innerHTML = "<p class='error'>Unable to load ORCID publications.</p>";
     }
+  }
 
-    async function loadPosters() {
-      const absList = document.getElementById("poster-list");
-      try {
-        const response = await fetch("data/posters.json");
-        if (!response.ok) return;
-
-        const posters = await response.json();
-        absList.innerHTML = "";
-
-        posters.forEach(p => {
-          const item = document.createElement("div");
-          item.className = "abs-item";
-          item.innerHTML = `
-            <h3>${p.title}</h3>
-            <p><strong>${p.authors}</strong></p>
-            <p><em>${p.conference}</em>, ${p.year}</p>
-          `;
-          absList.appendChild(item);
-        });
-      } catch (e) {
-        console.warn("No posters JSON found.");
-      }
-    }
-
-    loadLabPublications();
-    loadPosters();
+  loadORCID();
+  loadPosters();
   </script>
 
 </body>
