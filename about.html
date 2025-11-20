@@ -134,61 +134,77 @@
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 
   <!-- ORCID Loader -->
- <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+<script>
+const ORCID = "0000-0001-9059-8250";
 
-  async function loadPublications() {
-    const container = document.getElementById("pub-container");
+async function loadORCID() {
+  const container = document.getElementById("pub-container");
 
-    try {
-      const ORCID = "0000-0001-9059-8250";
-      const endpoint = `https://pub.orcid.org/v3.0/${ORCID}/works`;
+  try {
+    const endpoint = `https://pub.orcid.org/v3.0/${ORCID}/works`;
+    const response = await fetch(endpoint, {
+      headers: { "Accept": "application/json" }
+    });
 
-      const response = await fetch(endpoint, {
-        headers: { "Accept": "application/json" }
+    if (!response.ok) throw new Error("ORCID fetch failed");
+
+    const data = await response.json();
+    const works = data.group || [];
+
+    container.innerHTML = "";
+
+    works.forEach(group => {
+      const summary = group["work-summary"][0];
+
+      const title = summary.title?.title?.value || "Untitled";
+      const year = summary["publication-date"]?.year?.value || "—";
+      const journal = summary["journal-title"]?.value || "—";
+
+      // ---------- Extract PMID OR DOI ----------
+      let pmid = null;
+      let doi = null;
+
+      const ids = summary["external-ids"]?.["external-id"] || [];
+      ids.forEach(id => {
+        if (id["external-id-type"] === "pmid") {
+          pmid = id["external-id-value"];
+        }
+        if (id["external-id-type"] === "doi") {
+          doi = id["external-id-value"];
+        }
       });
 
-      if (!response.ok) {
-        throw new Error("ORCID fetch failed");
+      // ---------- Build Link ----------
+      let linkHtml = "";
+      if (pmid) {
+        linkHtml = `<p><a href="https://pubmed.ncbi.nlm.nih.gov/${pmid}/" target="_blank">View on PubMed →</a></p>`;
+      } else if (doi) {
+        linkHtml = `<p><a href="https://doi.org/${doi}" target="_blank">View Article →</a></p>`;
       }
 
-      const data = await response.json();
-      const works = data.group || [];
-
-      container.innerHTML = "";
-
-      works.forEach(group => {
-        const summary = group["work-summary"][0];
-        const title = summary.title?.title?.value || "Untitled";
-        const year = summary["publication-date"]?.year?.value || "—";
-        const journal = summary["journal-title"]?.value || "";
-        const putcode = summary["put-code"];
-
-        const pubURL = `https://pub.orcid.org/v3.0/${ORCID}/work/${putcode}`;
-
-        container.insertAdjacentHTML("beforeend", `
-          <div class="publication">
-            <h3>${title}</h3>
-            <p class="journal">${journal} (${year})</p>
-            <a href="${pubURL}" target="_blank">View on ORCID →</a>
-          </div>
-        `);
-      });
-
-      if (works.length === 0) {
-        container.innerHTML = "<p>No ORCID publications found.</p>";
-      }
-
-    } catch (err) {
-      console.error(err);
-      container.innerHTML = `
-        <p class="error">⚠️ Unable to load ORCID publications.</p>
+      const item = document.createElement("div");
+      item.className = "pub-item";
+      item.innerHTML = `
+        <h3>${title}</h3>
+        <p><em>${journal}</em> (${year})</p>
+        ${linkHtml}
       `;
-    }
-  }
+      container.appendChild(item);
+    });
 
-  loadPublications();
+    if (works.length === 0) {
+      container.innerHTML = "<p>No ORCID publications found.</p>";
+    }
+
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<p class='error'>Unable to load ORCID publications.</p>";
+  }
+}
+
+loadORCID();
 </script>
+
 
 
 </body>
